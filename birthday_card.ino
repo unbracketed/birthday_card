@@ -45,8 +45,9 @@ void setup()   {
 
   Serial.begin(9600);
 
-
   ShiftPWM.SetAmountOfRegisters(numRegisters);
+  ShiftPWM.Start(pwmFrequency,maxBrightness);  
+  ShiftPWM.SetAll(0);
 
   // iterate over the notes of the melody:
   for (int thisNote = 0; thisNote < 8; thisNote++) {
@@ -63,13 +64,10 @@ void setup()   {
     delay(pauseBetweenNotes);
     // stop the tone playing:
     noTone(7);
-
-    ShiftPWM.Start(pwmFrequency,maxBrightness);  
-
-    ShiftPWM.SetAll(0);
-
-    rgbLedRainbow(numRegisters*8/3, 5, 3, maxBrightness, numRegisters*8/3); // Fast, over all LED's
   }
+
+
+  rgbLedRainbow(numRegisters*8/3, 5, 3, maxBrightness, numRegisters*8/3); // Fast, over all LED's
 }
 
 void loop() {
@@ -94,4 +92,5 @@ void rgbLedRainbow(int numRGBLeds, int delayVal, int numCycles, int maxBrightnes
     } 
   }  
 }
+
 
